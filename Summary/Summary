@@ -218,3 +218,23 @@ Solution:
 git remote add origin git@github.com:nir-devel/conferences-multi-module-heroku.git
 git branch -M main
 git push -u origin main
+
+
+
+mysql://
+
+b945bb4abe1b67
+
+:
+
+d6f3f695
+
+@
+
+us-cdbr-east-04.cleardb.com
+
+/
+
+heroku_097bdf55cb43332
+
+?reconnect=true

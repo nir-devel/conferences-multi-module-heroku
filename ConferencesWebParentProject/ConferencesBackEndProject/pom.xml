@@ -15,7 +15,7 @@
 	<name>ConferencesBackEndProject</name>
 	<description>Conferences Back End Project</description>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>15</java.version>
 	</properties>
 	<dependencies>
 
