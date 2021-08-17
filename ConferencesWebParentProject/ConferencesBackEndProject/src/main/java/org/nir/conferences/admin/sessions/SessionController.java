@@ -14,16 +14,15 @@ public class SessionController
 	@Autowired private SessionService sessionService;
 	
 	
-	@GetMapping("/sessions")
-	public String listAll(Model model)
-	{
-		List<Session> listSessions = this.sessionService.listAll();
-		
-		model.addAttribute("listSessions", listSessions);
-		
-		
-		return "/sessions/sessions"; 
-		
-	}
-
+	/*
+	 * @GetMapping("/sessions") public String listAll(Model model) { List<Session>
+	 * listSessions = this.sessionService.listAll();
+	 * 
+	 * model.addAttribute("listSessions", listSessions);
+	 * 
+	 * 
+	 * return "/sessions/sessions";
+	 * 
+	 * }
+	 */
 }
