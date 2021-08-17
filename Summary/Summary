@@ -1,0 +1,220 @@
+
+
+Tasks List: 
+
+	1.Create the Multiple Maven Project:DONE
+	
+	2. Deploy to Heroku
+	
+	
+	
+*******************************************************************************************************
+					1.Create the Multiple Maven Project
+*********************************************************************************************************
+
+	1.Create the Root Project : DONE
+	
+	2.Create the Common Maven Project : Spring Boot Starter Project :DONE
+	
+	3.Create the WebParent module:DONE(NOTE THE JAVA NATURE) - POM - OK
+	
+	4.Create the CompanyAdmin Application Project under the WebParent:
+	
+	5.Update the ConferencesCommonProject : Add the Speaker and Session Entity Classes
+	
+	
+		
+-----------------------------------------------------------------------------
+		1.Create the Root Project : DONE
+---------------------------------------------------------------------------
+
+	1.1 Create a Maven project with pom packaging!
+	
+		NOT SPRING BOOT PROJECT!
+	
+	1.2 Update the Root Project - Add the Common project as a module
+
+
+-----------------------------------------------------------------------------
+			2.Create the Common Maven Project : Spring Boot Project :DONE
+-----------------------------------------------------------------------------
+Overview
+
+	This Project contains Entity Class(Model)and Repositories Dependencies
+	
+	
+Tasks List: 
+
+	2.1 Create the SB project and unchacked the default directory: 
+	
+		-Create the folder Common under the Company and put the project in this folder
+		
+	2.2 Remove the Class with the main class(I dont run this project)
+	
+	2.3 Remove the entire test package (under the src/test/java !)
+	
+	2.4 Update the pom : 
+	
+		2.4.1 Remove the Spring Boot Starter Test, An
+		
+		2.4.2 Remove the Spring Boot Maven Plugin : This a library and not and Application project
+		
+		
+---------------------------------------------------------------------------------
+				3.Create the CompanyWebParentProject module
+--------------------------------------------------------------------------------------
+NOTE: PROJECT NATURES:
+
+	3.1 Remove the Project Nature(Java Natures)
+	
+		Right Click on the project 
+		
+		=>Properties
+		
+		=>Project Natures
+		
+		=>Remove the Java Natures
+		
+			Because this Project is a Root Project for the other 2 Application Projects
+	
+	POM OR JAR???
+	
+		In the Digram it is pom..
+	Overview: 
+		
+		Contains the Common dependency between Application Projects.
+
+		3.1 Remove the Spring Boot Maven Plugin 
+		
+		  Keep the dependencies (the web and the test): Will be shared between all the Application Projects
+		  
+		3.2 Remove the entire package of the main class and the test: OK
+		
+		3.3 
+
+
+-----------------------------------------------------------------------------------------------------------------------
+					4.Create the CompanyAdmin Application Project under the WebParent
+------------------------------------------------------------------------------------------------------------------------
+
+	Tasks List: 
+	
+		4.1 Create the Spring starter project (under the WebParent project -> Unchack the Default Location
+		
+		4.2 No dependency - inherit from the WebParent Project
+		
+		4.3 Update the WebParent project - add this project as a Module
+		
+		4.4 Update the pom of the CompanyAdmin: Set the parent to the WebParent project(replace the Spring Boot)
+		
+			=>Remove the groupid and version - It inerit from the WebParent Project:
+			
+							<parent>
+								<groupId>org.nir.company</groupId>
+								<artifactId>WebParent</artifactId>
+								<version>0.0.1-SNAPSHOT</version>
+							</parent>
+							
+							
+		4.5 Remove the dependencies(Inherits from the WebParent)
+		
+		4.6 Remove the test package:DONE
+		
+		4.7 Update the application.properties file: Add the server port
+	
+	
+----------------------------------------------------------------------------------------------------------------------
+			5.Update the ConferencesCommonProject : Add the Speaker and Session Entity Classes / Repos /Unit Testing
+-----------------------------------------------------------------------------------------------------------------------	
+
+
+
+	Tasks List:
+		
+		5.1 Create the Entity Classes Speaker and Session, SessinoRepository Interface and the SessionRepositoryTests Class: 
+	
+	
+-------------------------------------------------------------------------------------------------------------
+						5.1 Create the Entity Classes Speaker and Session
+---------------------------------------------------------------------------------------
+I GOT THE EXCEPTION LIKE HIM:
+
+		Caused by: java.lang.IllegalArgumentException: Not a managed type: class org.nir.conferences.common.entity.Role
+		
+EXPLANATION:
+
+	Because the ConferenceBackEndApplication class is under:  
+	
+				package org.nir.conferences.admin;
+	
+	and the Role Entity Class is under:  
+	
+				package org.nir.conferences.common.entity;
+				
+	=>The scan skip the /conferences/...!!
+	
+	
+
+
+Solution: 
+
+	Update the ConferenceBackEndApplication: 
+	
+		Add @EntityScan({"org.nir.conferences.common.entity", "org.nir.conferences.admin.speaker"}
+	
+	NOTE:Update the pom of the  ConferencesCommonProject :DONE
+	
+		 Add the ConferencesWebParentProject in order to use the @JSONIGNORE  !
+	
+	
+***************************************************************************************************************************
+						6. Createing the Rest Controllers for Session and Speaker - and handling Serialziztion Issues with Many to Many!
+*****************************************************************************************************************************	
+	
+	
+	Overview: 
+	
+		Problem One: The Cyclical Palyload Serialization 
+		
+			 Run the app in Postman and open the URL: http://localhost:8081/CompanyAdmin/api/v1/sessions
+		
+		
+		
+		
+		Problem two: Spring - Hibernate Serialzition problem for the URL: URL: http://localhost:8081/CompanyAdmin/api/v1/sessions/[ID]	
+	
+				
+				I dont want to load all the children Data !
+				
+				=> I want to ignore it: 
+	
+	SOLUTION: DONE
+	
+		Update the ConferencesCommonProject pom: 
+		
+		1. Add the dependency: (Like Chad Does manually)
+		
+				<dependency>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+					<version>2.9.5</version>
+				</dependency>
+	
+		2. Update the Speaker Entity Class: (not the Session Dominant in the relationship)
+		
+			Use the @ annotation to let Jackson library look at and serialize my payload( I could create DTS...)
+		
+			Add the @JsonIgnore on the List<Sessoin> proeprty 
+			
+		3.Run the app in Postman and open the URL: http://localhost:8081/CompanyAdmin/api/v1/sessions 
+		
+		
+		=> OK!! THE PAYLOAD IS DISPLAYED WITHOUT CYCLIC..
+			
+******************************************************************************************************
+				2. Deploy to Heroku
+***************************************************************************************************88
+
+git remote add origin git@github.com:nir-devel/conferences-multi-module-heroku.git
+git branch -M main
+git push -u origin main
