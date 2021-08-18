@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController 
 {
-	/*
-	 * @GetMapping("/") public String viewHomePage() { return "index"; }
-	 */
+	
+	  @GetMapping("/") public String viewHomePage() { return "index"; }
+	 
 
 }
