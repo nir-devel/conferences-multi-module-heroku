@@ -212,9 +212,16 @@ Solution:
 		=> OK!! THE PAYLOAD IS DISPLAYED WITHOUT CYCLIC..
 			
 ******************************************************************************************************
-				2. Deploy to Heroku
+								2. Deploy to Heroku
 ***************************************************************************************************88
 
+Tasks List: 
+
+	1. Create my Github remote repo: DONE
+	
+	
+-------------------------------------------------------------------------------------------------------
+	
 git remote add origin git@github.com:nir-devel/conferences-multi-module-heroku.git
 git branch -M main
 git push -u origin main
