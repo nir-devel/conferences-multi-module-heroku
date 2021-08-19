@@ -22,6 +22,7 @@ public class SessionRestController
 		return this.sessionService.listAll();
 	}
 
+	//Just random comment
 	@GetMapping("/{id}")
 	public Session getSession(@PathVariable("id") Long sessionId)
 	{
