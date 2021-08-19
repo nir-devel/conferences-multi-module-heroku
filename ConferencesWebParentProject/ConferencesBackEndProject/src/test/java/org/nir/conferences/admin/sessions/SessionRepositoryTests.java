@@ -32,7 +32,7 @@ public class SessionRepositoryTests
 		
 	}
 	
-	
+	//Add a test comment
 	@Test
 	@DisplayName("When getting a session by it")
 	public void testFindById()
