@@ -1,6 +1,8 @@
 package org.nir.conferences.admin.sessions;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -30,25 +32,25 @@ public class SessionRepositoryTests
 		
 	}
 	
-	/*
-	 * @Test
-	 * 
-	 * @DisplayName("When Createing a Session") public void testCreateSession() {
-	 * //Given Session session = new Session("Java Session Nir", "Long one........",
-	 * 15, null);
-	 * 
-	 * 
-	 * //When Session savedSession = this.sessionRepository.save(session);
-	 * 
-	 * 
-	 * //Then assertThat(savedSession).isNotNull();
-	 * assertThat(savedSession.getSession_id()).isGreaterThan(0);
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * }
-	 */
+	
+	@Test
+	@DisplayName("When getting a session by it")
+	public void testFindById()
+	{
+		//GIVEN
+		Long id = 91l;
+		
+		//WHEN
+		Session session = this.sessionRepository.findById(id).get();
+		
+		//THEN
+		assertThat(session).isNotNull();
+		assertThat(session.getSession_id()).isEqualTo(id);
+		assertThat(session.getSession_name()).isEqualTo("Personal Kanban");
+		
+		
+		System.out.println(">>testFindById():SUCCESS! The session is : \n" + session);
+		
+	}
 
 }

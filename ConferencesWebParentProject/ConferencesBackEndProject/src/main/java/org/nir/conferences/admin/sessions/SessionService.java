@@ -19,4 +19,11 @@ public class SessionService
 		return this.sessionRepository.findAll();
 	}
 
+
+	
+	public Session getSession(Long sessionId) 
+	{
+		return this.sessionRepository.findById(sessionId).get();
+	}
+
 }

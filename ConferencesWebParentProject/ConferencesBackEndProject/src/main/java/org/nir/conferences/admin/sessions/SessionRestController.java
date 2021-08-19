@@ -5,6 +5,7 @@ import java.util.List;
 import org.nir.conferences.common.entity.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,12 @@ public class SessionRestController
 		return this.sessionService.listAll();
 	}
 
+	@GetMapping("/{id}")
+	public Session getSession(@PathVariable("id") Long sessionId)
+	{
+		return this.sessionService.getSession(sessionId);
+	}
+	
 	
 	
 }
