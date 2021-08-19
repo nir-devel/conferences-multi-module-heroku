@@ -22,6 +22,7 @@ public class SessionRepositoryTests
 {
 	@Autowired private SessionRepository sessionRepository;
 	
+	//Add a test comment
 	@Test
 	@DisplayName("When list all Sessions")
 	public void testListAllSessions()

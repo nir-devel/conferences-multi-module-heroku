@@ -13,7 +13,7 @@ public class SessionService
 {
 	@Autowired private SessionRepository sessionRepository; 
 	
-	
+	//...
 	public List<Session> listAll()
 	{
 		return this.sessionRepository.findAll();
